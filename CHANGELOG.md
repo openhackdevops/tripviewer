@@ -2,6 +2,7 @@
 
 <a name="1.1.0"></a>
 1.1.0 (04/02/2019)
+Test
 
 *Features*
 - Refactored Blue/Green support in api charts
