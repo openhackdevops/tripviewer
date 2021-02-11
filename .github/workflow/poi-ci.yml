@@ -1,0 +1,32 @@
+name: POI CI
+
+on:
+  push:
+    paths:
+    - 'apis/poi/**'
+  pull_request:
+    paths:
+    - 'apis/poi/**'
+  workflow_dispatch:  
+env:
+  WORK_DIR: apis/poi
+jobs:
+  buildtestci:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up DotNet
+      uses: actions/setup-dotnet@v1
+    - name: Build with DotNet
+      working-directory: ${{env.WORK_DIR }}
+      run: dotnet build 
+    - name: Test DotNet
+      working-directory: ${{env.WORK_DIR }}
+      run: dotnet test
+    - name: The job has failed 
+      if: ${{failure() }}
+      uses: JasonEtco/create-an-issue@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      with:
+        filename: .github/ISSUE_TEMPLATE.md
