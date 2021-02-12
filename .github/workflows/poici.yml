@@ -19,10 +19,10 @@ jobs:
       uses: actions/setup-dotnet@v1
     - name: Build with DotNet
       working-directory: ${{env.WORK_DIR }}
-      run: dotnet build 
+      run: dotnet build .
     - name: Test DotNet
       working-directory: ${{env.WORK_DIR }}
-      run: dotnet test
+      run: dotnet test .
     - name: The job has failed 
       if: ${{failure() }}
       uses: JasonEtco/create-an-issue@v2
